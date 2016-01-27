@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../build/react.js"></script>
+        <script src="../build/react-dom.js"></script>
+        <script src="../build/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <script type="text/babel">
+            var MyTitle = React.createClass({
+                //要求title的属性的data类型是string,只能是string
+                propTypes: {
+                    title: React.PropTypes.string.isRequired,
+                },
+
+                render: function() {
+                    return <h1> {this.props.title} </h1>;
+                }
+            });
+
+            //测试部分, 将title属性设置成 int类型, 然后会报错
+            //将123用引号包起来标示为字符串类型将不在报错
+            var data = 123;
+
+            ReactDOM.render(
+                <MyTitle title = {data} />,
+                document.body
+                );
+        </script>
+    </body>
+</html>

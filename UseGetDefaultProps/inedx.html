@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../build/react.js"></script>
+        <script src="../build/react-dom.js"></script>
+        <script src="../build/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <script type="text/babel">
+        //获取默认的属性
+        //获取的是title的值
+            var MyTitle = React.createClass({
+              getDefaultProps : function () {
+                return {
+                  title : 'shinepans'
+                };
+              },
+
+              render: function() {
+                 return <h1> {this.props.title} </h1>;
+               }
+            });
+
+            ReactDOM.render(
+              <MyTitle />,
+              document.body
+            );
+        </script>
+    </body>
+</html>
