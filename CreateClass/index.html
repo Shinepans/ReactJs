@@ -8,16 +8,14 @@
     <body>
         <div id="example"></div>
         <script type="text/babel">
-            var names = ['Shine', 'Pans', 'Panshang'];
-            //jsx可以让html和js混用, <>是html, {}是js
-            ReactDOM.render(
-                <div>
-                {
-                    names.map(function (name){
-                        return <div> Hello, {name}!</div>
-                    })
+        //HelloMessage 是一个组件类。模板插入 <HelloMessage /> 时，会自动生成 HelloMessage 的一个实例
+            var HelloMessage = React.createClass({
+                render: function(){
+                    return <h1>Hello, {this.props.name}</h1>;
                 }
-                </div>,
+            });
+            ReactDOM.render(
+                <HelloMessage name = "Pan" />,
                 document.getElementById('example')
             );
         </script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../build/react.js"></script>
+        <script src="../build/react-dom.js"></script>
+        <script src="../build/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <script type="text/babel">
+        //NoteList 组件有两个 span 子节点，它们都可以通过 this.props.children 读取
+            var NotesList = React.createClass({
+              render: function() {
+                return (
+                  <ol>
+                  {
+                    React.Children.map(this.props.children, function (child) {
+                      return <li>{child}</li>;
+                    })
+                  }
+                  </ol>
+                );
+              }
+            });
+
+            ReactDOM.render(
+              <NotesList>
+                <span>hello</span>
+                <span>Pan! </span>
+              </NotesList>,
+              document.body
+            );
+        </script>
+    </body>
+</html>
