@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8")> </meta>
+        <script src="../build/react.js"></script>
+        <script src="../build/react-dom.js"></script>
+        <script src="../build/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <script type="text/babel">
+        //监听textarea的变化, 变化了就更新p标签里的内容
+        //下面初始化了 输入框和p的初始值
+            var Input = React.createClass({
+              getInitialState: function() {
+                return {value: '请在文本框输入文本'};
+              },
+              handleChange: function(event) {
+                this.setState({value: event.target.value});
+              },
+              render: function () {
+                var value = this.state.value;
+                return (
+                  <div>
+                    <textarea rows="30" cols="30" value={value} onChange={this.handleChange} />
+                    <p>{value}</p>
+                  </div>
+                );
+              }
+            });
+
+            ReactDOM.render(<Input/>, document.body);
+        </script>
+    </body>
+</html>
