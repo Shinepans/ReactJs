@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8")> </meta>
+        <script src="../build/react.js"></script>
+        <script src="../build/react-dom.js"></script>
+        <script src="../build/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+        <script type="text/babel">
+        //个人理解: State 和 Props
+        //这两个用起来都可以达到另一个的功能,
+        //我觉得至于为什么要分这两个叫法是为了规范
+        //就像POST和GET, 其实这两个可以等价, 但是为了规范必须使用相对应的type
+            //Mouting : 已插入真实 DOM
+            //Updating: 正在被重新渲染
+            //Unmouting: 已移除真实DOM
+            //状态提供了 will 和did 函数, will在函数进入之前调用, did在函数进入之后调用
+            // 五种处理函数:
+            //componentWillMount()
+            // componentDidMount()
+            // componentWillUpdate(object nextProps, object nextState)
+            // componentDidUpdate(object prevProps, object prevState)
+            // componentWillUnmount()
+            // 两种特殊状态的处理函数:
+            // componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+            // shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+            var Hello = React.createClass({
+                //设定初始状态
+              // getInitialState: function () {
+              //   return {
+              //     opacity: 1.0
+              //   };
+              // },
+              // 这里测试使用Props, 原则上应该使用State, 但这里Props也可以实现
+              getDefaultProps : function () {
+                return {
+                  opacity : 1.0
+                };
+              },
+                //函数进入之后执行的操作
+              componentDidMount: function () {
+                this.timer = setInterval(function () {
+                  // var opacity = this.state.opacity;
+                  // 使用Props
+                  var opacity = this.props.opacity;
+                  opacity -= .05;
+                  if (opacity < 0.1) {
+                    opacity = 1.0;
+                  }
+                  // this.setState({
+                  //   opacity: opacity
+                  // });
+                  // 将setState 改为setProps
+                  this.setProps({
+                    opacity: opacity
+                  });
+                }.bind(this), 100);
+              },
+                //渲染
+              render: function () {
+                return (
+                  // <div style={{opacity: this.state.opacity}}>
+                  // 通过props改变div的透明度
+                  <div style={{opacity: this.props.opacity}}>
+                    <h3> Props和State区别测试 {this.props.name}  </h3>
+                  </div>
+                );
+              }
+            });
+                //DOM渲染
+            ReactDOM.render(
+              <Hello name="this is component name"/>,
+              document.body
+            );
+        </script>
+    </body>
+</html>
